@@ -14,18 +14,18 @@ const PROJECT_URL = process.env.PROJECT_URL || '';    // 需要上传订阅或�
 const AUTO_ACCESS = process.env.AUTO_ACCESS || false; // false关闭自动保活，true开启,需同时填写PROJECT_URL变量
 const YT_WARPOUT = process.env.YT_WARPOUT || false;   // 设置为true时强制使用warp出站访问youtube,false时自动检测是否设置warp出站
 const FILE_PATH = process.env.FILE_PATH || './.npm';  // sub.txt订阅文件路径
-const SUB_PATH = process.env.SUB_PATH || 'leaflow';       // 订阅sub路径，默认为sub,例如：https://google.com/sub
-const UUID = process.env.UUID || '22d73127-cc6a-4163-8081-2cafd693828c';  // 在不同的平台运行了v1哪吒请修改UUID,否则会覆盖
-const NEZHA_SERVER = process.env.NEZHA_SERVER || 'nzag.faiz.us.kg:8008';         // 哪吒面板地址,v1形式：nz.serv00.net:8008  v0形式：nz.serv00.net
+const SUB_PATH = process.env.SUB_PATH || 'sub';       // 订阅sub路径，默认为sub,例如：https://google.com/sub
+const UUID = process.env.UUID || '0a6568ff-ea3c-4271-9020-450560e10d63';  // 在不同的平台运行了v1哪吒请修改UUID,否则会覆盖
+const NEZHA_SERVER = process.env.NEZHA_SERVER || '';         // 哪吒面板地址,v1形式：nz.serv00.net:8008  v0形式：nz.serv00.net
 const NEZHA_PORT = process.env.NEZHA_PORT || '';             // v1哪吒请留空，v0 agent端口，当端口为{443,8443,2087,2083,2053,2096}时，自动开启tls
-const NEZHA_KEY = process.env.NEZHA_KEY || 'JgARl5rWKs4k8TTuG1OgFcaxrxsjmpHl';               // v1的NZ_CLIENT_SECRET或v0 agwnt密钥 
-const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'leaflow.kaixa.xx.kg';           // argo固定隧道域名,留空即使用临时隧道
-const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiNmI3MzZhMDhiMzlmNDVlMzE2ZTdlMGNkODE2Yjc2ZDIiLCJ0IjoiOWM5MDU1YmYtODJkNy00NWM0LWI0ZjAtZmY0Y2JiNjBmM2ZiIiwicyI6Ik5qSXdPRGd6WlRZdE4yVTJOaTAwWVdWa0xXSmlOamt0Tm1ReE5qRXlORFk1TkRreCJ9';               // argo固定隧道token或json,留空即使用临时隧道
-const ARGO_PORT = process.env.ARGO_PORT || 41890;             // argo固定隧道端口,使用token需在cloudflare控制台设置和这里一致，否则节点不通
-const TUIC_PORT = process.env.TUIC_PORT || '35560';               // tuic端口，支持多端口的可以填写，否则留空
-const HY2_PORT = process.env.HY2_PORT || '35561';                 // hy2端口，支持多端口的可以填写，否则留空
-const REALITY_PORT = process.env.REALITY_PORT || '35562';         // reality端口，支持多端口的可以填写，否则留空
-const CFIP = process.env.CFIP || 'cdns.doon.eu.org';            // 优选域名或优选IP
+const NEZHA_KEY = process.env.NEZHA_KEY || '';               // v1的NZ_CLIENT_SECRET或v0 agwnt密钥 
+const ARGO_DOMAIN = process.env.ARGO_DOMAIN || '';           // argo固定隧道域名,留空即使用临时隧道
+const ARGO_AUTH = process.env.ARGO_AUTH || '';               // argo固定隧道token或json,留空即使用临时隧道
+const ARGO_PORT = process.env.ARGO_PORT || 8001;             // argo固定隧道端口,使用token需在cloudflare控制台设置和这里一致，否则节点不通
+const TUIC_PORT = process.env.TUIC_PORT || '';               // tuic端口，支持多端口的可以填写，否则留空
+const HY2_PORT = process.env.HY2_PORT || '';                 // hy2端口，支持多端口的可以填写，否则留空
+const REALITY_PORT = process.env.REALITY_PORT || '';         // reality端口，支持多端口的可以填写，否则留空
+const CFIP = process.env.CFIP || 'cf.877774.xyz';            // 优选域名或优选IP
 const CFPORT = process.env.CFPORT || 443;                    // 优选域名或优选IP对应端口
 const PORT = process.env.PORT || 3000;                       // http订阅端口    
 const NAME = process.env.NAME || '';                         // 节点名称
@@ -113,12 +113,7 @@ function cleanupOldFiles() {
 
 // 根路由
 app.get("/", function(req, res) {
-  const htmlPath = path.join(__dirname, 'app.html');
-  if (fs.existsSync(htmlPath)) {
-    res.sendFile(htmlPath);
-  } else {
-    res.send("Hello world!");
-  }
+  res.send("Hello world!");
 });
 
 // 获取固定隧道json
